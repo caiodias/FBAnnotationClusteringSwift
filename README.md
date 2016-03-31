@@ -81,7 +81,7 @@ Drop in these MKMapViewDelegate methods:
 ```
 extension ViewController: MKMapViewDelegate {
 
-    func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool){
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool){
         NSOperationQueue().addOperationWithBlock({
             let mapBoundsWidth = Double(self.mapView.bounds.size.width)
             let mapRectWidth:Double = self.mapView.visibleMapRect.size.width
@@ -91,7 +91,7 @@ extension ViewController: MKMapViewDelegate {
         })
     }
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var reuseId = ""
         if annotation.isKindOfClass(FBAnnotationCluster) {
             reuseId = "Cluster"
@@ -102,7 +102,7 @@ extension ViewController: MKMapViewDelegate {
             reuseId = "Pin"
             var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView!.pinColor = .Green
+            pinView!.pinTintColor = UIColor.greenColor()
             return pinView
         }
     }
